@@ -1,6 +1,6 @@
 package main
 
-import "talk-optional-parameters/strawman"
+import "github.com/chrisjoyce911/talk-optional-parameters/strawman"
 
 func main() {
 	straw := strawman.New("important")

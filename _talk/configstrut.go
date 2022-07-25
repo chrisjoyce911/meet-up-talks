@@ -1,4 +1,4 @@
-package strawman
+package talk
 
 import (
 	"crypto/tls"

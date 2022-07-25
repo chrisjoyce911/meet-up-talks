@@ -1,8 +1,3 @@
-package main
-
-import (
-	"_improved/strawman"
-)
 
 // START OMIT
 func main() {
