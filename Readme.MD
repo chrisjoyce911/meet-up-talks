@@ -1,9 +1,13 @@
-go install -v golang.org/x/tools/cmd/present@latest
-go get golang.org/x/tools/cmd/present
+```go install -v golang.org/x/tools/cmd/present@latest```
 
-present  -http 127.0.0.1:3999
-present  -http 127.0.0.1:3999 -notes
-present  -http 127.0.0.1:3999 -notes -use_playground false
+```go get golang.org/x/tools/cmd/present```
+
+```present  -http 127.0.0.1:3999```
+
+```present  -http 127.0.0.1:3999 -notes```
+
+```present  -http 127.0.0.1:3999 -notes -use_playground false```
+
 
 
 
