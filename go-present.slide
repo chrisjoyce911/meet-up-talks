@@ -17,10 +17,10 @@ Specifically, we want that
 
 In search of a general and elegant solution to this problem, I'll present a few straw-man approaches as motivations for you to think about functional options and **`With*()`** pattern.
 
-: (After first paragraph) 
+: (After first paragraph)
 : I want to begin my talk with a story.
 : Your company is launching a revolutionary new distributed service.
-: As don't understand yet the full requirments of this service, the first set of requirments are very limited.
+: As don't understand yet the full requirements of this service, the first set of requirements are very limited.
 : You have been tasked with writing the crucial service component. Possibly it looks a little like this.
 
 ## Strawman
@@ -48,11 +48,11 @@ In search of a general and elegant solution to this problem, I'll present a few 
 : Now, you need to change your API to incorporate all these feature requests
 
 
-## An imporved API, maybe
+## An improved API, maybe
 
-.code _talk/imporved.go /START OMIT/,/END OMIT/
+.code _talk/improved.go /START OMIT/,/END OMIT/
 
-Lets just add more fields to  **`NewServer`** and therefore to change the constructor into 
+Lets just add more fields to  **`NewServer`** and therefore to change the constructor into
 
 Not only is this function incompatible with existing calls, it also becomes less readable as we add more parameters.
 
@@ -67,11 +67,11 @@ Not only is this function incompatible with existing calls, it also becomes less
 
 ## But what if ?
 
-I want to create an instance of the Server for testing, do I need to provide a real TLS certificate ? 
+I want to create an instance of the Server for testing, do I need to provide a real TLS certificate ?
 
 .code _talk/tls.go /START OMIT/,/END OMIT/
 
-I don’t care about maxconns, or maxconcurrent what value should I use ? 
+I don’t care about maxconns, or maxconcurrent what value should I use ?
 
 .code _talk/max.go /START OMIT/,/END OMIT/
 
@@ -87,7 +87,7 @@ I don’t care about maxconns, or maxconcurrent what value should I use ?
 
 Rather than trying to provide one single function which must cater for every permutation, a solution might be to create a set of functions.
 
-_but_ it also means the total number of functions grows exponentially (power of 2) with the number of parameters, since each parameter could be included or excluded in a function. 
+_but_ it also means the total number of functions grows exponentially (power of 2) with the number of parameters, since each parameter could be included or excluded in a function.
 
 : With this approach, when callers need a secure server they can call the TLS variant.
 : When they need to establish a maximum duration for idle connections, they can use the variant that takes a timeout.
@@ -96,7 +96,7 @@ _but_ it also means the total number of functions grows exponentially (power of 
 
 ## Putting all params in a struct
 
-.code _talk/configstrut.go /START OMIT/,/END OMIT/
+.code _talk/configstruct.go /START OMIT/,/END OMIT/
 
 Using this approach, the configuration struct can grow over time as new options are added, while the public API for creating a server itself remains unchanged.
 
@@ -130,7 +130,7 @@ The **`nil`** pointer is a good way distinguish set vs unset.
 
 .code _talk/allpointers.go  /START OMIT/,/END OMIT/
 
-Since the  **`nil`** pointer is a good way distinguish set vs unset, making all the fields a pointer seems to do the trick. 
+Since the  **`nil`** pointer is a good way distinguish set vs unset, making all the fields a pointer seems to do the trick.
 
 In Go there is no such thing as **`&20`** or **`&"hello"`**
 
@@ -200,7 +200,7 @@ Is there a way to use a variadic function signature and improve the expressivene
 
 I think that there is.
 
-At this point I want to make it clear that that the idea of functional options comes from a blog post titled. 
+At this point I want to make it clear that that the idea of functional options comes from a blog post titled.
 *Self referential functions and design by Rob Pike* , published in January 2014.
 
 
@@ -243,17 +243,17 @@ Using this pattern we can make an API that has
 
 ## New strawman
 
-.code strawman/strawman.go 
+.code strawman/strawman.go
 
 ## Options for example
 
-.code strawman/options.go 
+.code strawman/options.go
 
 ## Options for example
 
-.code strawman/hay.go 
+.code strawman/hay.go
 
-## Client code 
+## Client code
 
 .play -edit main.go
 
