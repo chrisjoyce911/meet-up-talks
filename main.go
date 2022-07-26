@@ -3,10 +3,21 @@ package main
 import "github.com/chrisjoyce911/talk-optional-parameters/strawman"
 
 func main() {
-	straw := strawman.New("important")
-	straw = strawman.New("important", strawman.WithNum(30))
-	straw = strawman.New("required", strawman.WithNum(20), strawman.WithStr("hello"))
+	straw := strawman.New("AUD")
+	straw = strawman.New("AUD", strawman.Quantity(30))
+	straw = strawman.New("AUD", strawman.Quantity(30), strawman.UsedFor("barskets"))
+
+	// Using a preset
+	straw = strawman.New("AUD", strawman.ForFeed())
+
+	straw.BuyUnits(10)
+
+	straw.CurrentUnits()
+	straw.CurrentValue()
 
 	straw.MakeHay()
+
+	straw.CurrentUnits()
+	straw.CurrentValue()
 
 }

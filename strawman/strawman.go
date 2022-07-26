@@ -1,18 +1,23 @@
 package strawman
 
 type Strawman struct {
-	Num int
-	Str string
+	currency  string // HL
+	transport string // HL
+	quantity  int    // HL
+	use       string // HL
 }
 
-func New(someRequiredField string, opts ...Option) *Strawman {
+// New provides access to a new straw trading calculator
+func New(currency string, opts ...Option) *Strawman {
 	straw := &Strawman{
-		Num: 10,
-		Str: "hello",
+		currency:  currency, // HL
+		quantity:  1,        // HL
+		use:       "feed",   // HL
+		transport: "bale",   // HL
 	}
 
 	for _, applyOpt := range opts {
-		applyOpt(straw)
+		applyOpt(straw) // HL
 	}
 
 	return straw

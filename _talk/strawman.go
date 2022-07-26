@@ -3,7 +3,7 @@ package strawman
 import "net"
 
 type Server struct {
-	listener net.Listener
+	listener net.Listener // HL
 }
 
 func (s *server) Addr() new.Addr
@@ -17,6 +17,6 @@ func NewServer(addr String) (*Server, error) {
 	}
 
 	svr := Server{listener: l}
-	go srv.run()
+	go srv.run() // HL
 	return &srv, nil
 }

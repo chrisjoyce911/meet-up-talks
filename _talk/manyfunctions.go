@@ -21,8 +21,11 @@ func (s *server) Shutdown()
  NewTLSServer(addr String, cert *tls.Cert) (*Server, error) // HL
 
  // NewServerWithTimeout returns a Server listening on addr that disconnects idel clients
- NewServerWithTimeout(addr String, clientTimeout time.Duration, maxcons, maxconcurrent int) (*Server, error) // HL
+ NewServerWithTimeout(addr String, clientTimeout time.Duration, maxcons, maxconcurrent int) // HL
+  (*Server, error) // HL
 
-// NewTLSSServerWithTimeout returns a secure Server listening on addr that disconnects idel clients
- NewServerWithTimeout(addr String, clientTimeout time.Duration, maxcons, maxconcurrent int, cert *tls.Cert) (*Server, error) // HL
+// NewTLSSServerWithTimeout returns a secure Server listening on addr 
+// that disconnects idel clients
+ NewServerWithTimeout(addr String, clientTimeout time.Duration, maxcons, // HL
+	 maxconcurrent int, cert *tls.Cert) (*Server, error) // HL
 // END OMIT

@@ -4,6 +4,4 @@
 		// Use all values in opt to create Foo.
 	}
 	// Use all default values.
-}
-
-// END OMIT
+}// END OMIT
