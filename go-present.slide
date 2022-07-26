@@ -285,6 +285,7 @@ Using this pattern we can make an API that has
 .play -edit main.go
 
 : Looks quite clean 
+: Lets trade
 
 ## Parameters with default values if unspecified ?
 

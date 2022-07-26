@@ -1,7 +1,7 @@
 package strawman
 
 import (
-	"log"
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -10,7 +10,7 @@ var l float32
 
 func (s *Strawman) MakeHay() {
 
-	log.Print("Making Hay")
+	fmt.Println("Making Hay")
 	time.Sleep(2 * time.Second)
 
 	l = getvalue()
@@ -22,12 +22,13 @@ func (s *Strawman) MakeHay() {
 		if n < l {
 			if s.quantity > 0 {
 				s.quantity = s.quantity - 1
-				log.Printf("Selling at\t: %s$%f", s.currency, float32(1+getvalue()))
+				fmt.Printf("Selling at\t: %s$%f\n", s.currency, float32(1+getvalue()))
 			}
 		} else {
-			s.quantity = s.quantity + 1
-			log.Printf("Buying at\t: %s$%f", s.currency, float32(1+getvalue()))
+			s.quantity = s.quantity + 4
+			fmt.Printf("Buying at\t: %s$%f\n", s.currency, float32(1+getvalue()))
 		}
+		l = n
 		time.Sleep(1 * time.Second)
 	}
 
@@ -35,15 +36,15 @@ func (s *Strawman) MakeHay() {
 
 func (s *Strawman) BuyUnits(n int) {
 	s.quantity = s.quantity + n
-	log.Printf("Balance : %d", s.quantity)
+	fmt.Printf("Balance : %d\n", s.quantity)
 }
 
 func (s *Strawman) CurrentUnits() {
-	log.Printf("Curret Balance\t: %d", s.quantity)
+	fmt.Printf("Curret Balance\t: %d\n", s.quantity)
 }
 
 func (s *Strawman) CurrentValue() {
-	log.Printf("Current Value\t: %s$%f", s.currency, (float32(s.quantity)*1 + getvalue()))
+	fmt.Printf("Current Value\t: %s$%f\n", s.currency, (float32(s.quantity)*1 + getvalue()))
 }
 
 func getvalue() float32 {
