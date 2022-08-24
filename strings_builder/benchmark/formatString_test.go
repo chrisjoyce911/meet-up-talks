@@ -6,19 +6,17 @@ import (
 
 var result string
 
+// START OMIT
+
 func data() []string {
-	var s []string
-	last := "a"
-	for i := 0; i < 1000; i++ {
-		s = append(s, last)
-		last += "a"
+	s := []string{"Test String"}
+	for i := 0; i < 25; i++ {
+		s = append(s, s[len(s)-1]+"Test String")
 	}
 	return s
 }
 
-// START OMIT
 func Benchmark_formatString(b *testing.B) {
-
 	var s string
 	for i := 0; i < b.N; i++ {
 		s = formatString(data())
@@ -27,7 +25,6 @@ func Benchmark_formatString(b *testing.B) {
 }
 
 func Benchmark_builderString(b *testing.B) {
-
 	var s string
 	for i := 0; i < b.N; i++ {
 		s = builderString(data())

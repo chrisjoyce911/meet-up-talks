@@ -59,4 +59,25 @@ We can also write the bytes, rune to the builder buffer using **WriteByte** , **
 
 ## Benchmarking
 
-.play strings_builder/benchmark/formatString_test.go /START OMIT/,/END OMIT/
+.code strings_builder/benchmark/formatString_test.go /START OMIT/,/END OMIT/
+
+## Results
+
+    go test -bench=.  -benchmem -run=^# -count=5
+
+    goos: darwin
+    goarch: amd64
+    pkg: github.com/chrisjoyce911/talk-optional-parameters/strings_builder/benchmark
+    cpu: Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
+    Benchmark_formatString-6          161946              7532 ns/op           43816 B/op         55 allocs/op
+    Benchmark_formatString-6          142192              7534 ns/op           43816 B/op         55 allocs/op
+    Benchmark_formatString-6          138440              7478 ns/op           43816 B/op         55 allocs/op
+    Benchmark_formatString-6          143678              7426 ns/op           43816 B/op         55 allocs/op
+    Benchmark_formatString-6          159788              7541 ns/op           43816 B/op         55 allocs/op
+    Benchmark_builderString-6         315973              3906 ns/op           16216 B/op         40 allocs/op
+    Benchmark_builderString-6         272908              3807 ns/op           16216 B/op         40 allocs/op
+    Benchmark_builderString-6         280107              3801 ns/op           16216 B/op         40 allocs/op
+    Benchmark_builderString-6         276476              3753 ns/op           16216 B/op         40 allocs/op
+    Benchmark_builderString-6         271591              3797 ns/op           16216 B/op         40 allocs/op
+    PASS
+    ok      github.com/chrisjoyce911/talk-optional-parameters/strings_builder/benchmark     14.485s
