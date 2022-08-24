@@ -1,0 +1,62 @@
+# Strings Builder
+“A Builder is used to efficiently build a string using Write methods. It minimizes memory copying.” — Go doc
+
+Chris Joyce
+Aughust 2022
+chris@joyce.id.au
+
+## Introduction
+
+In this article we are going to look how we can use strings. Builder to build and concatenate strings.
+
+## Example usecase without using strings.Builder
+
+Lets assume a simple use case where we have string slice and from which we have to create a string that contains all the elements.
+
+.play -edit strings_builder/without/main.go /START OMIT/,/END OMIT/
+
+Every time the code **ret += str** executes, a new string is created.
+
+Because strings are immutable in Go.
+
+To avoid this we can use strings builder.
+
+: This code is fine. But every time the code ret += str executes
+: a new string is created (new string needs to be allocated in memory)
+: Because strings are immutable in Go
+
+
+## Same usecase using strings.Builder
+
+.play -edit strings_builder/using/main.go /START OMIT/,/END OMIT/
+
+Here we have used strings.Builder to build the string. 
+
+_Builder is like a backing array._
+
+_It has Len and Cap. Whenever len not fit in cap, the cap will grow._
+
+
+
+## Lets see whats happening in the backend
+
+.play -edit strings_builder/backend/main.go /START OMIT/,/END OMIT/
+
+Here in this code I have printed some stuffs that helps to understand how the Builder buffer grows.
+
+
+## Reset
+
+We can also reset the builder and reuse it if required (based on the requirement)
+
+.play -edit strings_builder/reset/main.go /START OMIT/,/END OMIT/
+
+We can also write the bytes, rune to the builder buffer using **WriteByte** , **WriteRune** methods respectively.
+
+: After the reset, the data is resetted (data is erased).
+: Thats why I have assigned the data in the Builder to the result variable “result = sb.String()” before calling “sb.Reset()”.
+
+
+## Benchmarking
+
+.play strings_builder/benchmark/formatString_test.go /START OMIT/,/END OMIT/
