@@ -25,7 +25,7 @@ In search of a general and elegant solution to this problem, I'll present a few 
 
 ## Strawman
 
-.code strawman/_talk/strawman.go
+.code _strawmansrc/_talk/strawman.go
 
 : (Just notes)
 : There are some unexported fields that need to be initialised, and a goroutine must be started to service incoming requests.
@@ -53,7 +53,7 @@ In search of a general and elegant solution to this problem, I'll present a few 
 
 ## An improved API, maybe
 
-.code strawman/_talk/improved.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/improved.go /START OMIT/,/END OMIT/
 
 Lets just add more fields to  **`NewServer`** and therefore to change the constructor into
 
@@ -72,11 +72,11 @@ Not only is this function incompatible with existing calls, it also becomes less
 
 I want to create an instance of the Server for testing, do I need to provide a real TLS certificate ?
 
-.code strawman/_talk/tls.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/tls.go /START OMIT/,/END OMIT/
 
 I don’t care about maxconns, or maxconcurrent what value should I use ?
 
-.code strawman/_talk/max.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/max.go /START OMIT/,/END OMIT/
 
 : (Notes only) I don't need a cert, what do I provide instead ? .. nil maybe ?
 : I don’t care about maxconns, or maxconcurrent
@@ -86,7 +86,7 @@ I don’t care about maxconns, or maxconcurrent what value should I use ?
 
 ## Many functions make light work
 
-.code strawman/_talk/manyfunctions.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/manyfunctions.go /START OMIT/,/END OMIT/
 
 Rather than trying to provide one single function which must cater for every permutation, a solution might be to create a set of functions.
 
@@ -99,7 +99,7 @@ _but_ it also means the total number of functions grows exponentially (power of 
 
 ## Putting all params in a struct
 
-.code strawman/_talk/configstruct.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/configstruct.go /START OMIT/,/END OMIT/
 
 Using this approach, the configuration struct can grow over time as new options are added, while the public API for creating a server itself remains unchanged.
 
@@ -112,7 +112,7 @@ Potentially it also enables the callers to use the zero value to signify they th
 
 ## Limited options
 
-.code strawman/_talk/limited.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/limited.go /START OMIT/,/END OMIT/
 
 It has trouble with defaults, especially if the zero value has a well understood meaning.
 
@@ -123,7 +123,7 @@ For example, in the config structure shown here, when Port is not provided, NewS
 : But this has the downside that you can no longer explicitly set Port to 0 and have the operating system automatically choose a free port, because that explicit 0 is indistinguishable from the fields’ zero value.
 
 ## Passing a struct pointer
-.code strawman/_talk/structpointer.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/structpointer.go /START OMIT/,/END OMIT/
 
 The **`nil`** pointer is a good way distinguish set vs unset ?
 
@@ -133,13 +133,13 @@ The **`nil`** pointer is a good way distinguish set vs unset ?
 
 ## Make all fields pointers
 
-.code strawman/_talk/allpointers.go  /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/allpointers.go  /START OMIT/,/END OMIT/
 
 Since the  **`nil`** pointer is a good way distinguish set vs unset, making all the fields a pointer seems to do the trick.
 
 In Go there is no such thing as **`&20`** or **`&"hello"`**
 
-.code strawman/_talk/allpointersset.go  /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/allpointersset.go  /START OMIT/,/END OMIT/
 
 : (Notes only) Since the nil pointer is a good way distinguish set vs unset ...but wait..
 : However, this is not user-friendly at all,
@@ -149,7 +149,7 @@ In Go there is no such thing as **`&20`** or **`&"hello"`**
 
 ## "I just want a server, I don't want to have to think about it"
 
-.code strawman/_talk/wantaserver.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/wantaserver.go /START OMIT/,/END OMIT/
 
 Most of the time, users of your API will be expecting to use its default behaviour.
 
@@ -163,7 +163,7 @@ Even though they do not intend to change any of the configuration parameters, th
 
 ## Maybe adding indirection will help
 
-.code strawman/_talk/indirection.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/indirection.go /START OMIT/,/END OMIT/
 
 A common solution to this empty value problem is to pass a pointer to the value instead, thereby enabling callers to use nil rather than constructing an empty value.
 
@@ -183,7 +183,7 @@ So now with these points in mind, I want to talk about what I believe are some b
 
 ## Variadic configuration
 
-.code strawman/_talk/variadic.go  /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/variadic.go  /START OMIT/,/END OMIT/
 
 First, the default behaviour becomes as concise as possible.
 
@@ -213,7 +213,7 @@ At this point I want to make it clear that that the idea of functional options c
 
 ## Functional Options
 
-.code strawman/_talk/functional.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/functional.go /START OMIT/,/END OMIT/
 
 The key difference from the previous example, and in fact all the examples so far,
 
@@ -225,7 +225,7 @@ is customisation of the NewServer is performed not with configuration parameters
 
 ## Functional Options In the API
 
-.code strawman/_talk/functional_cont.go /START OMIT/,/END OMIT/
+.code _strawmansrc/_talk/functional_cont.go /START OMIT/,/END OMIT/
 
 Inside NewServer, applying these options is straightforward.
 
@@ -253,7 +253,7 @@ Using this pattern we can make an API that has
 
 ## Straw trading calculator
 
-.code strawman/package/strawman.go
+.code _strawmansrc/package/strawman.go
 
 : Let's build a straw trading calculator service, we all know its the next big thing !
 : The API has no exported fields 
@@ -262,9 +262,9 @@ Using this pattern we can make an API that has
 
 ## Functional Options 
 
-.code strawman/package/options.go /OPTIONSSTART OMIT/,/OPTIONSEND OMIT/
+.code _strawmansrc/package/options.go /OPTIONSSTART OMIT/,/OPTIONSEND OMIT/
 
-.image strawman/options.png
+.image _strawmansrc/options.png
 .caption Using a Option type can go a long way with an IED that supports IntelliSense
 
 : So what option's to we want our API to have ?
@@ -274,7 +274,7 @@ Using this pattern we can make an API that has
 
 ## Functional means nicer Presets
 
-.code strawman/package/options.go /CUSTOMSTART OMIT/,/CUSTOMEND OMIT/
+.code _strawmansrc/package/options.go /CUSTOMSTART OMIT/,/CUSTOMEND OMIT/
 
 : Now we are using functional options we there can be more usable options made avaiable
 : Lets make it easer for clients to set things up by providing some easy to use presets
@@ -282,7 +282,7 @@ Using this pattern we can make an API that has
 
 ## Client code
 
-.play -edit strawman/main.go
+.code _strawmansrc/main.go
 
 : Looks quite clean 
 : Lets trade

@@ -1,6 +1,6 @@
 package main
 
-import strawman "github.com/chrisjoyce911/meet-up-talks/strawman/package"
+import strawman "github.com/chrisjoyce911/meet-up-talks/_strawmansrc/package"
 
 func main() {
 	straw := strawman.New("AUD")
@@ -16,8 +16,4 @@ func main() {
 	straw.CurrentValue()
 
 	straw.MakeHay()
-
-	straw.CurrentUnits()
-	straw.CurrentValue()
-
 }
