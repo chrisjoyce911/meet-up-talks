@@ -13,7 +13,7 @@ In this article we are going to look how we can use strings. Builder to build an
 
 Lets assume a simple use case where we have string slice and from which we have to create a string that contains all the elements.
 
-.play -edit strings_builder/without/main.go /START OMIT/,/END OMIT/
+.play -edit _strings_buildersrc/without/main.go /START OMIT/,/END OMIT/
 
 Every time the code **ret += str** executes, a new string is created.
 
@@ -28,7 +28,7 @@ To avoid this we can use strings builder.
 
 ## Same usecase using strings.Builder
 
-.play -edit strings_builder/using/main.go /START OMIT/,/END OMIT/
+.play -edit _strings_buildersrc/using/main.go /START OMIT/,/END OMIT/
 
 Here we have used strings.Builder to build the string. 
 
@@ -40,7 +40,7 @@ _It has Len and Cap. Whenever len not fit in cap, the cap will grow._
 
 ## Lets see whats happening in the backend
 
-.play -edit strings_builder/backend/main.go /START OMIT/,/END OMIT/
+.play -edit _strings_buildersrc/backend/main.go /START OMIT/,/END OMIT/
 
 Here in this code I have printed some stuffs that helps to understand how the Builder buffer grows.
 
@@ -49,7 +49,7 @@ Here in this code I have printed some stuffs that helps to understand how the Bu
 
 We can also reset the builder and reuse it if required (based on the requirement)
 
-.play -edit strings_builder/reset/main.go /START OMIT/,/END OMIT/
+.play -edit _strings_buildersrc/reset/main.go /START OMIT/,/END OMIT/
 
 We can also write the bytes, rune to the builder buffer using **WriteByte** , **WriteRune** methods respectively.
 
@@ -59,7 +59,7 @@ We can also write the bytes, rune to the builder buffer using **WriteByte** , **
 
 ## Benchmarking
 
-.code strings_builder/benchmark/formatString_test.go /START OMIT/,/END OMIT/
+.code _strings_buildersrc/benchmark/formatString_test.go /START OMIT/,/END OMIT/
 
 ## Results
 
@@ -67,7 +67,7 @@ We can also write the bytes, rune to the builder buffer using **WriteByte** , **
 
     goos: darwin
     goarch: amd64
-    pkg: github.com/chrisjoyce911/talk-optional-parameters/strings_builder/benchmark
+    pkg: github.com/chrisjoyce911/meet-up-talks/_strings_buildersrc/benchmark
     cpu: Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
     Benchmark_formatString-6          161946              7532 ns/op           43816 B/op         55 allocs/op
     Benchmark_formatString-6          142192              7534 ns/op           43816 B/op         55 allocs/op
@@ -80,4 +80,4 @@ We can also write the bytes, rune to the builder buffer using **WriteByte** , **
     Benchmark_builderString-6         276476              3753 ns/op           16216 B/op         40 allocs/op
     Benchmark_builderString-6         271591              3797 ns/op           16216 B/op         40 allocs/op
     PASS
-    ok      github.com/chrisjoyce911/talk-optional-parameters/strings_builder/benchmark     14.485s
+    ok      github.com/chrisjoyce911/meet-up-talks/_strings_buildersrc/benchmark     14.485s

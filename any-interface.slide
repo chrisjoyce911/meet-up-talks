@@ -1,0 +1,108 @@
+# any is an alias for interface{}
+
+“any is an alias for interface{}
+    and is equivalent to interface{} in all ways.” — Go doc
+
+Chris Joyce
+31 August 2022
+chris@joyce.id.au
+
+## Introduction
+
+As generics have been released in Go 1.18, I've started learning them.
+
+I generally get the concept but sometime you need to stop and think.
+
+For instance:
+
+_"type any = interface{} ?"_
+
+_"when it's more suitable to use any instead of interface{} ?"_
+
+
+## interface{} is dead, long live the interface{}
+
+Since Go 1.18, there exists an alias for **_interface{}_** called **_any_**
+
+.image ../_any-interfacesrc/any.png  225 _
+
+With this the Go stdlib has replaced all references to **_interface{}_** with **_any_**.
+
+**Updating Your Code** can be done with one simple command:
+
+```gofmt -r 'interface{} -> any' -w *.go```
+
+Simply run this within your Go project to rewrite all **_interface{}_**  to **_any_**.
+
+## When it's more suitable to use any instead of interface{} ?
+
+Since it is an alias, it doesn't matter which one you use.
+
+They are one and the same. They are interchangeable.
+
+You can replace one with the other, the code will mean the same.
+
+**_any_** is shorter and clearer, but only works from Go 1.18.
+
+.code _any-interfacesrc/main.go /SUITABLE_START/,/SUITABLE_END/
+
+## Why not use generics ?
+
+Now we are using **_any_** , why not just use generics ?
+
+.code _any-interfacesrc/trash.go /FUNCTIONS_START/,/FUNCTIONS_END/
+
+What could go wrong with just going generic ?
+
+## Generics does not mean that every function ought to be generic
+
+It may be worth pointing out that not everything that can be implemented with generics should therefore be implemented with generics.
+
+Just because Go now has generics that does not mean that every function ought to be generic.
+
+This applies to my contrived example where the only thing that both functions are doing is they pass the argument over to fmt.Printf which itself is **not generic**
+
+.code _any-interfacesrc/main.go /NOTGENERIC_START/,/NOTGENERIC_END/
+
+## interface{} != any,  when using generics ?
+
+.code _any-interfacesrc/trash.go /TYPICAL_FUNC_START/,/TYPICAL_FUNC_END/
+
+```./prog.go:8:10: cannot infer T (prog.go:15:15)```
+
+If **_interface{}_** called **_any_** whats wrong ?
+
+## The source of cannot infer T error
+
+The reason why printAny() doesn't work is due to it being a generic function with a type parameter.
+
+To use it, it must be instantiated (must be assigned with a known type).
+
+Trying to call it with **_nil_**  carries no type information, so instantiation cannot happen, type inference won't work.
+
+If you call it with a nil value that carries type info, it'll work, or if you specify the type param explicitly
+
+.code  _any-interfacesrc/type.go /TYPICAL_FUNC_START/,/TYPICAL_FUNC_END/
+
+
+## We now have the answer
+
+Now we understand that **_any_** with generics must have a **_type_** , can we answer the question ?
+
+When it's more suitable to use any instead of interface{} ?
+
+Yes we can, always use **_any_** . 
+
+.code _any-interfacesrc/main.go /FUNCTIONS_START/,/FUNCTIONS_END/
+
+
+## Lets see it in action
+
+When using generics we need to make sure any parameter is instantiated.
+
+(its type parameter must be assigned with a known type)
+
+.play _any-interfacesrc/main.go /MAIN_START/,/MAIN_END/
+
+
+

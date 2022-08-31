@@ -1,4 +1,4 @@
-module github.com/chrisjoyce911/talk-optional-parameters
+module github.com/chrisjoyce911/meet-up-talks
 
 go 1.18
 

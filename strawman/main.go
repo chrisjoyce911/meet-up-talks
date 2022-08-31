@@ -1,6 +1,6 @@
 package main
 
-import strawman "github.com/chrisjoyce911/talk-optional-parameters/strawman/package"
+import strawman "github.com/chrisjoyce911/meet-up-talks/strawman/package"
 
 func main() {
 	straw := strawman.New("AUD")
