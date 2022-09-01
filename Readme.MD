@@ -19,4 +19,9 @@ https://commonmark.org/help/tutorial/
 ```go-presentx```
 
 
+go install github.com/chrisjoyce911/go-benchrun@latest
+
 go install golang.org/x/perf/cmd/benchstat@latest
+
+
+go-benchrun EmptySliceLit MakeEmptySlice -v -count=5 .

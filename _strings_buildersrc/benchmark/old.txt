@@ -1,0 +1,9 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/chrisjoyce911/meet-up-talks/_strings_buildersrc/benchmark
+cpu: Intel(R) Core(TM) i5-8500 CPU @ 3.00GHz
+BenchmarkFormat-6   	  147072	      7490 ns/op
+BenchmarkFormat-6   	  160987	      7586 ns/op
+BenchmarkFormat-6   	  153760	      7655 ns/op
+PASS
+ok  	github.com/chrisjoyce911/meet-up-talks/_strings_buildersrc/benchmark	4.057s

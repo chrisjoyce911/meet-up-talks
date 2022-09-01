@@ -16,7 +16,7 @@ func data() []string {
 	return s
 }
 
-func Benchmark_formatString(b *testing.B) {
+func BenchmarkFormat(b *testing.B) {
 	var s string
 	for i := 0; i < b.N; i++ {
 		s = formatString(data())
@@ -24,7 +24,7 @@ func Benchmark_formatString(b *testing.B) {
 	result = s
 }
 
-func Benchmark_builderString(b *testing.B) {
+func BenchmarkBuilder(b *testing.B) {
 	var s string
 	for i := 0; i < b.N; i++ {
 		s = builderString(data())
